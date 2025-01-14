@@ -41,7 +41,7 @@
 
 <script setup>
 import { ref } from "vue";
-import NavLink from "components/nav/NavLink.vue";
+import NavLink from "components/Nav/NavLink.vue";
 
 const NavLinks = [
   {
