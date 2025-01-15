@@ -1,6 +1,5 @@
 <template>
-  <div class="text-h6">Todos</div>
-  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+  <div class="text-body1 text-weight-medium">{{ index }} {{ todo.title }}</div>
 </template>
 
 <script setup>

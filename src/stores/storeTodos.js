@@ -28,4 +28,9 @@ export const useStoreTodos = defineStore("todos", () => {
       isMoveToArchives: false,
     },
   ]);
+
+  return {
+    // state
+    todos,
+  };
 });
