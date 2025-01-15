@@ -30,10 +30,10 @@
 
 <script setup>
 import { ref } from "vue";
-import { useStoreTodos } from "src/stores/storeTodos";
+import { useTodosStore } from "src/stores/storeTodos";
 import Todos from "components/Entries/Todos.vue";
 import Archives from "components/Entries/Archives.vue";
 
 const tab = ref("todos");
-const storeTodos = useStoreTodos();
+const storeTodos = useTodosStore();
 </script>

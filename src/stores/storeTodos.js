@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { reactive } from "vue";
 
-export const useStoreTodos = defineStore("todos", () => {
+export const useTodosStore = defineStore("todos", () => {
   const todos = reactive([
     {
       id: "id1",
