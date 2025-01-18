@@ -43,8 +43,9 @@
             v-model="addTodoForm.title"
             ref="inputTitle"
             outlined
-            placeholder="todo 입력"
+            placeholder="새로운 Todo를 입력해주세요."
             bg-color="white"
+            clearable
           />
         </div>
 
@@ -96,6 +97,7 @@ const addTodoForm = reactive({
 
 const addTodoFormReset = () => {
   Object.assign(addTodoForm, addTodoFormDefault);
+  inputTitle.value.focus();
 };
 
 const addTodoFormSumit = () => {
