@@ -4,7 +4,7 @@
       v-model="tab"
       dense
       align="justify"
-      class="bg-primary bg-white shadow-2"
+      class="bg-white shadow-2"
       :breakpoint="0"
       indicator-color="primary"
     >

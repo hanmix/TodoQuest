@@ -36,12 +36,32 @@
     <q-page-container>
       <router-view />
     </q-page-container>
+    <q-footer borded>
+      <q-form class="row items-center q-pa-sm" @submit="addTodoFormSumit">
+        <div class="col">
+          <q-input
+            v-model="addTodoForm.title"
+            ref="inputTitle"
+            outlined
+            placeholder="todo 입력"
+            bg-color="white"
+          />
+        </div>
+
+        <div class="col-auto q-pl-sm">
+          <q-btn color="positive" round type="submit">
+            <q-icon name="fa-solid fa-arrow-up"></q-icon>
+          </q-btn>
+        </div>
+      </q-form>
+    </q-footer>
   </q-layout>
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, reactive } from "vue";
 import NavLink from "components/Nav/NavLink.vue";
+import { useTodosStore } from "src/stores/storeTodos";
 
 const NavLinks = [
   {
@@ -57,8 +77,29 @@ const NavLinks = [
 ];
 
 const leftDrawerOpen = ref(false);
+const inputTitle = ref(null);
+const storeTodos = useTodosStore();
 
 function toggleLeftDrawer() {
   leftDrawerOpen.value = !leftDrawerOpen.value;
 }
+
+const addTodoFormDefault = {
+  title: "",
+  isDone: false,
+  isMoveToArchives: false,
+};
+
+const addTodoForm = reactive({
+  ...addTodoFormDefault,
+});
+
+const addTodoFormReset = () => {
+  Object.assign(addTodoForm, addTodoFormDefault);
+};
+
+const addTodoFormSumit = () => {
+  storeTodos.addTodo(addTodoForm);
+  addTodoFormReset();
+};
 </script>

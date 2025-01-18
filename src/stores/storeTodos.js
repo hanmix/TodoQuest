@@ -1,7 +1,9 @@
 import { defineStore } from "pinia";
 import { reactive } from "vue";
+import { uid } from "quasar";
 
 export const useTodosStore = defineStore("todos", () => {
+  // state
   const todos = reactive([
     {
       id: "id1",
@@ -29,8 +31,16 @@ export const useTodosStore = defineStore("todos", () => {
     },
   ]);
 
+  // actions
+  const addTodo = (addTodoForm) => {
+    const newTodo = Object.assign({}, addTodoForm, { id: uid() });
+    todos.unshift(newTodo);
+  };
+
   return {
     // state
     todos,
+    // actions
+    addTodo,
   };
 });
