@@ -37,6 +37,10 @@
         </q-list>
       </q-tab-panel>
     </q-tab-panels>
+
+    <q-footer v-if="tab === 'todos'">
+      <AddTodo />
+    </q-footer>
   </q-page>
 </template>
 
@@ -47,6 +51,7 @@ import { useArchivesStore } from "src/stores/storeArchives";
 import Todos from "components/Entries/Todos.vue";
 import Archives from "components/Entries/Archives.vue";
 import EmptyItem from "components/Entries/EmptyItem.vue";
+import AddTodo from "components/Entries/AddTodo.vue";
 
 const tab = ref("todos");
 const storeTodos = useTodosStore();
