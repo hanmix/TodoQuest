@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { reactive } from "vue";
-import { uid } from "quasar";
+import { uid, Notify } from "quasar";
 import { getFormattedDate } from "../helpers/timeStampHelper";
 
 export const useTodosStore = defineStore("todos", () => {
@@ -41,7 +41,35 @@ export const useTodosStore = defineStore("todos", () => {
   ]);
 
   // actions
-  const createTodo = (title) => ({
+  const addTodo = (addTodoForm) => {
+    todos.unshift(initialTodo(addTodoForm.title));
+  };
+
+  const removeTodo = (todoId) => {
+    const index = getTodoIndexById(todoId);
+    todos.splice(index, 1);
+
+    Notify.create({
+      message: "Todo removed",
+      position: "bottom",
+    });
+  };
+
+  const updateTodo = (todoId, updates) => {
+    const index = getTodoIndexById(todoId);
+    Object.assign(todos[index], updates);
+  };
+
+  const pinTodo = (todoId) => {
+    const todo = todos.find((todo) => todo.id === todoId);
+    if (todo) {
+      todo.isPinned = !todo.isPinned;
+      sortTodosByPin();
+    }
+  };
+
+  // hepler functions
+  const initialTodo = (title) => ({
     id: uid(),
     title,
     isDone: false,
@@ -50,8 +78,8 @@ export const useTodosStore = defineStore("todos", () => {
     createdAt: getFormattedDate(),
   });
 
-  const addTodo = (addTodoForm) => {
-    todos.unshift(createTodo(addTodoForm.title));
+  const getTodoIndexById = (todoId) => {
+    return todos.findIndex((todo) => todo.id === todoId);
   };
 
   const sortTodosByPin = () => {
@@ -63,19 +91,13 @@ export const useTodosStore = defineStore("todos", () => {
     });
   };
 
-  const pinTodo = (todoId) => {
-    const todo = todos.find((todo) => todo.id === todoId);
-    if (todo) {
-      todo.isPinned = !todo.isPinned;
-      sortTodosByPin();
-    }
-  };
-
   return {
     // state
     todos,
     // actions
     addTodo,
+    removeTodo,
+    updateTodo,
     pinTodo,
   };
 });
