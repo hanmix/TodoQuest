@@ -14,7 +14,8 @@
 
     <q-tab-panels v-model="tab" animated>
       <q-tab-panel name="todos">
-        <q-list bordered separator>
+        <EmptyItem v-if="!storeTodos.todos.length" />
+        <q-list v-else bordered separator>
           <q-item v-for="(todo, index) in storeTodos.todos" :key="todo.id">
             <q-item-section>
               <Todos :todo="todo" :index="index" />
@@ -45,6 +46,7 @@ import { useTodosStore } from "src/stores/storeTodos";
 import { useArchivesStore } from "src/stores/storeArchives";
 import Todos from "components/Entries/Todos.vue";
 import Archives from "components/Entries/Archives.vue";
+import EmptyItem from "components/Entries/EmptyItem.vue";
 
 const tab = ref("todos");
 const storeTodos = useTodosStore();
