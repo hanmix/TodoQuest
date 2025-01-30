@@ -24,19 +24,18 @@
         @click="storeTodos.pinTodo(todo.id)"
       />
       <q-item-section>
-        <strong class="text-h6">{{ todo.title }}</strong>
+        <strong class="text-body">{{ todo.title }}</strong>
         <div class="text-caption">
           {{ todo.createdAt }}
         </div>
 
         <q-popup-edit
-          @save="onNameUpdate"
+          @save="onTitleUpdate"
           :model-value="todo.title"
           v-slot="scope"
           :cover="true"
-          :offset="[16, 12]"
           anchor="top left"
-          label-set="Ok"
+          label-set="Done"
           auto-save
           buttons
         >
@@ -71,7 +70,7 @@ const storeTodos = useTodosStore();
 
 const onTodoSlideLeft = ({ reset }) => {
   // storeTodos.updateTodo(props.todo.id, { isDone: !props.todo.isDone });
-  // reset();
+  reset();
   console.log("onTodoSlideLeft");
 };
 
@@ -80,7 +79,7 @@ const onTodoSlideRight = ({ reset }) => {
   reset();
 };
 
-const onNameUpdate = (value) => {
+const onTitleUpdate = (value) => {
   storeTodos.updateTodo(props.todo.id, { title: value });
 };
 </script>
