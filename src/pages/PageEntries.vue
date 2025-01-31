@@ -14,9 +14,12 @@
 
     <q-tab-panels v-model="tab" animated>
       <q-tab-panel name="todos">
-        <EmptyItem v-if="!storeTodos.todos.length" :tab="tab" />
+        <EmptyItem v-if="!storeTodos.activeTodos.length" :tab="tab" />
         <q-list v-else bordered separator>
-          <q-item v-for="(todo, index) in storeTodos.todos" :key="todo.id">
+          <q-item
+            v-for="(todo, index) in storeTodos.activeTodos"
+            :key="todo.id"
+          >
             <q-item-section>
               <Todos :todo="todo" :index="index" />
             </q-item-section>
@@ -25,10 +28,10 @@
       </q-tab-panel>
 
       <q-tab-panel name="archives">
-        <EmptyItem v-if="!storeTodos.todos.length" :tab="tab" />
+        <EmptyItem v-if="!storeTodos.completedTodos.length" :tab="tab" />
         <q-list v-else bordered separator>
           <q-item
-            v-for="(archive, index) in storeTodos.todos"
+            v-for="(archive, index) in storeTodos.completedTodos"
             :key="archive.id"
           >
             <q-item-section>

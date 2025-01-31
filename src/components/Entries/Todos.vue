@@ -4,7 +4,6 @@
     @right="onTodoSlideRight"
     left-color="positive"
     right-color="negative"
-    :class="{ 'bg-grey-2': todo.isDone }"
   >
     <template v-slot:left>
       <q-icon name="done" />
@@ -69,9 +68,8 @@ const props = defineProps({
 const storeTodos = useTodosStore();
 
 const onTodoSlideLeft = ({ reset }) => {
-  // storeTodos.updateTodo(props.todo.id, { isDone: !props.todo.isDone });
+  storeTodos.updateTodo(props.todo.id, { isDone: !props.todo.isDone });
   reset();
-  console.log("onTodoSlideLeft");
 };
 
 const onTodoSlideRight = ({ reset }) => {
