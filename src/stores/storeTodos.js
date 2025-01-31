@@ -73,7 +73,6 @@ export const useTodosStore = defineStore("todos", () => {
     id: uid(),
     title,
     isDone: false,
-    isMoveToArchives: false,
     isPinned: false,
     createdAt: getFormattedDate(),
   });

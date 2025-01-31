@@ -25,10 +25,10 @@
       </q-tab-panel>
 
       <q-tab-panel name="archives">
-        <EmptyItem v-if="!storeArchives.archives.length" :tab="tab" />
+        <EmptyItem v-if="!storeTodos.todos.length" :tab="tab" />
         <q-list v-else bordered separator>
           <q-item
-            v-for="(archive, index) in storeArchives.archives"
+            v-for="(archive, index) in storeTodos.todos"
             :key="archive.id"
           >
             <q-item-section>
@@ -48,7 +48,6 @@
 <script setup>
 import { ref } from "vue";
 import { useTodosStore } from "src/stores/storeTodos";
-import { useArchivesStore } from "src/stores/storeArchives";
 import Todos from "components/Entries/Todos.vue";
 import Archives from "components/Entries/Archives.vue";
 import EmptyItem from "components/Entries/EmptyItem.vue";
@@ -56,5 +55,4 @@ import AddTodo from "components/Entries/AddTodo.vue";
 
 const tab = ref("todos");
 const storeTodos = useTodosStore();
-const storeArchives = useArchivesStore();
 </script>
