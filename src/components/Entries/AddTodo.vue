@@ -40,6 +40,11 @@ const addTodoFormReset = () => {
 };
 
 const addTodoFormSumit = () => {
+  if (addTodoForm.title.trim() === "") {
+    alert("Todo 제목을 입력하세요.");
+    inputTitle.value.focus();
+    return;
+  }
   storeTodos.addTodo(addTodoForm);
   addTodoFormReset();
 };
