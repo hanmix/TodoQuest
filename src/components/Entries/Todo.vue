@@ -50,10 +50,6 @@ const props = defineProps({
     type: Object,
     required: true,
   },
-  index: {
-    type: Number,
-    required: true,
-  },
 });
 
 const storeTodos = useTodosStore();

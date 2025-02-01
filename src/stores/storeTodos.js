@@ -7,15 +7,23 @@ export const useTodosStore = defineStore("todos", () => {
   // state
   const todos = reactive([]);
 
+  watch(todos, () => {
+    sortTodosByDate();
+  });
+
+  // getters
+  const activeTodos = computed(() => {
+    return todos.filter((todo) => !todo.isDone);
+  });
+
+  const completedTodos = computed(() => {
+    return todos.filter((todo) => todo.isDone);
+  });
+
   // actions
   const addTodo = (addTodoForm) => {
     const newTodo = initialTodo(addTodoForm.title);
-    const firstUnpinnedIndex = todos.findIndex((todo) => !todo.isPinned);
-    if (firstUnpinnedIndex === -1) {
-      todos.unshift(newTodo);
-    } else {
-      todos.splice(firstUnpinnedIndex, 0, newTodo);
-    }
+    todos.unshift(newTodo);
   };
 
   const removeTodo = (todoId) => {
@@ -32,26 +40,11 @@ export const useTodosStore = defineStore("todos", () => {
     const index = getTodoIndexById(todoId);
     Object.assign(todos[index], updates);
   };
-
-  // getters
-  const activeTodos = computed(() => {
-    return todos.filter((todo) => !todo.isDone);
-  });
-
-  const completedTodos = computed(() => {
-    return todos.filter((todo) => todo.isDone);
-  });
-
-  watch(todos, () => {
-    sortTodosByDate();
-  });
-
   // helper functions
   const initialTodo = (title) => ({
     id: uid(),
     title,
     isDone: false,
-    isPinned: false,
     createdAt: getFormattedDate(),
   });
 
@@ -66,12 +59,12 @@ export const useTodosStore = defineStore("todos", () => {
   return {
     // state
     todos,
+    // getters
+    activeTodos,
+    completedTodos,
     // actions
     addTodo,
     removeTodo,
     updateTodo,
-    // getters
-    activeTodos,
-    completedTodos,
   };
 });
