@@ -13,15 +13,6 @@
     </template>
 
     <q-item>
-      <q-btn
-        round
-        flat
-        :icon="todo.isPinned ? 'star' : 'star_border'"
-        size="12px"
-        :ripple="false"
-        :color="todo.isPinned ? 'primary' : 'grey-5'"
-        @click="storeTodos.pinTodo(todo.id)"
-      />
       <q-item-section>
         <strong class="text-body">{{ todo.title }}</strong>
         <div class="text-caption">
