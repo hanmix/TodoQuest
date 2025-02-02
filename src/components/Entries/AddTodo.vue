@@ -1,5 +1,8 @@
 <template>
-  <q-form class="row items-center q-pa-sm" @submit="addTodoFormSumit">
+  <q-form
+    class="row items-center q-pa-sm bg-primary shadow-up-2"
+    @submit="addTodoFormSumit"
+  >
     <div class="col">
       <q-input
         v-model="addTodoForm.title"
